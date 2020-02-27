@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Algorithms;
@@ -14,14 +15,16 @@ namespace Sort
 {
     public partial class Form1 : Form
     {
-        List<SortedItem> sortedItems = new List<SortedItem>();
         Random rnd = new Random();
+        List<SortedItem> sortedItems = new List<SortedItem>();
+
         AlgorithmsBase<int> toSort = new AlgorithmsBase<int>();
-        List<AlgorithmsBase<int>> TypeSort = new List<AlgorithmsBase<int>>()
+
+        List<AlgorithmsBase<SortedItem>> TypeSort = new List<AlgorithmsBase<SortedItem>>()
         {
-            new BubbleSort<int>(),
-            new CocktailSort<int>(),
-            new InsertionSort<int>()
+            new BubbleSort<SortedItem>(),
+            new CocktailSort<SortedItem>(),
+            new InsertionSort<SortedItem>()
         };
         public Form1()
         {
@@ -48,7 +51,7 @@ namespace Sort
                     textBoxAdd.Clear();
                     toSort.Items.Add(value);
                     DisplayItems(labelToSort, toSort.Items);
-                    DisplayPanelItemSorted(toSort.Items);
+                    DisplayPanelItemSorted(toSort.Items,out sortedItems);
                 }
             }
         }
@@ -65,7 +68,7 @@ namespace Sort
                         {
                             int value = rnd.Next(min, max);
                             toSort.Items.Add(value);
-                            DisplayPanelItemSorted(toSort.Items);
+                            DisplayPanelItemSorted(toSort.Items,out sortedItems);
                         }
                         DisplayItems(labelToSort, toSort.Items);
                     }
@@ -73,39 +76,62 @@ namespace Sort
             }
         }
 
+        private void buttonClear_Click(object sender, EventArgs e)
+        {
+            toSort.Items.Clear();
+            labelToSort.Text = labelSorted.Text = "";
+            RemoveSortedItems();
+        }
+
         private void buttonSort_Click(object sender, EventArgs e)
         {
-            labelSorted.Text = "";
-            AlgorithmsBase<int> sorted = (AlgorithmsBase<int>)TypeSortListBox.SelectedItem;
+            AlgorithmsBase<SortedItem> sorted = (AlgorithmsBase<SortedItem>)TypeSortListBox.SelectedItem;
             if (sorted == null)
             {
                 labelSorted.Text = "Type sort is not selected";
                 return;
             }
-            sorted.Items.AddRange(toSort.Items);
+            labelSorted.Text = "";
+            //RemoveSortedItems();
+            sorted.Items.Clear();
+            ClearPanelItem();
+            sorted.Items.AddRange(sortedItems);
+            DisplayPanelItemSorted(sorted.Items);
+            if (checkBoxVisualize.Checked)
+            {
+                if (sorted is BubbleSort<SortedItem>)
+                {
+                    sorted.CompareEvent += BubbleSort_CompareEvent;
+                    sorted.SwopEvent += BubbleSort_SwopEvent;
+                }
+            }
             try
             {
-                sorted.TimeToSort();
+                var time = sorted.TimeToSort();
             }
             catch (NotImplementedException)
             {
-                labelSorted.Text = "Type sort is not selected";
+                labelSorted.Text = "Type sort is not corrected " + nameof(sorted);
                 return;
             }
             DisplayItems(labelSorted, sorted.Items);
-            sorted.Items.Clear();
+            //sorted.Items.Clear();
         }
 
-        private void buttonClear_Click(object sender, EventArgs e)
+        private void BubbleSort_SwopEvent(object sender, Tuple<SortedItem, SortedItem> e)
         {
-            toSort.Items.Clear();
-            labelToSort.Text = labelSorted.Text = "";
-            foreach (var item in sortedItems)
-            {
-                panelItemSorted.Controls.Remove(item.ItemLabel);
-                panelItemSorted.Controls.Remove(item.ItemVerticalProgressBar);
-            }
-            sortedItems.Clear();
+            int temp = e.Item1.Value;
+            e.Item1.SetValue(e.Item2.Value);
+            e.Item2.SetValue(temp);
+            panelItemSorted.Refresh();
+        }
+        private void BubbleSort_CompareEvent(object sender, Tuple<SortedItem, SortedItem> e)
+        {
+            e.Item1.SetColor(Color.Red);
+            e.Item2.SetColor(Color.DarkRed);
+            panelItemSorted.Refresh();
+            e.Item1.SetColor(Color.Blue);
+            e.Item2.SetColor(Color.Blue);
         }
 
         public void DisplayItems(Label label, List<int> items)
@@ -123,6 +149,22 @@ namespace Sort
                 }
             }
         }
+        public void DisplayItems(Label label, List<SortedItem> items)
+        {
+            label.Text = "";
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (i > 0)
+                {
+                    label.Text += ", " + items[i].ToString();
+                }
+                else
+                {
+                    label.Text += items[i].ToString();
+                }
+            }
+        }
+
         public void DisplayPanelItemSorted(List<int> items)
         {
             foreach (var item in sortedItems)
@@ -131,14 +173,60 @@ namespace Sort
                 panelItemSorted.Controls.Remove(item.ItemVerticalProgressBar);
             }
             sortedItems.Clear();
+            int number = 0;
             foreach (var value in items)
             {
-                var sortedItem = new SortedItem(value);
+                var sortedItem = new SortedItem(value, number);
                 sortedItems.Add(sortedItem);
                 panelItemSorted.Controls.Add(sortedItem.ItemVerticalProgressBar);
                 panelItemSorted.Controls.Add(sortedItem.ItemLabel);
+                number++;
             }
+            panelItemSorted.Refresh();
         }
-            
+        public void DisplayPanelItemSorted(List<int> items, out List<SortedItem> sortedItems)
+        {
+            var result = new List<SortedItem>();
+            ClearPanelItem();
+            int number = 0;
+            foreach (var value in items)
+            {
+                var sortedItem = new SortedItem(value, number);
+                result.Add(sortedItem);
+                panelItemSorted.Controls.Add(sortedItem.ItemVerticalProgressBar);
+                panelItemSorted.Controls.Add(sortedItem.ItemLabel);
+                number++;
+            }
+            sortedItems = result;
+            panelItemSorted.Refresh();
+        }
+        public void DisplayPanelItemSorted(List<SortedItem> items)
+        {
+            ClearPanelItem();
+            int number = 0;
+            foreach (var item in items)
+            {
+                panelItemSorted.Controls.Add(item.ItemVerticalProgressBar);
+                panelItemSorted.Controls.Add(item.ItemLabel);
+                number++;
+            }
+            panelItemSorted.Refresh();
+        }
+        
+        public void RemoveSortedItems()
+        {
+            //foreach (var item in sortedItems)
+            //{
+            //    panelItemSorted.Controls.Remove(item.ItemLabel);
+            //    panelItemSorted.Controls.Remove(item.ItemVerticalProgressBar);
+            //}
+            sortedItems.Clear();
+            ClearPanelItem();
+        }
+        public void ClearPanelItem()
+        {
+            panelItemSorted.Controls.Clear();
+            panelItemSorted.Refresh();
+        }
     }
 }

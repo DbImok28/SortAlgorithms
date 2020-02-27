@@ -46,7 +46,7 @@
             this.rndMaxLabel = new System.Windows.Forms.Label();
             this.textBoxRandomMin = new System.Windows.Forms.TextBox();
             this.randomAddLable = new System.Windows.Forms.Label();
-            this.checkBoxVisualise = new System.Windows.Forms.CheckBox();
+            this.checkBoxVisualize = new System.Windows.Forms.CheckBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -120,11 +120,10 @@
             // 
             // TypeSortListBox
             // 
-            this.TypeSortListBox.Dock = System.Windows.Forms.DockStyle.Right;
             this.TypeSortListBox.FormattingEnabled = true;
-            this.TypeSortListBox.Location = new System.Drawing.Point(747, 0);
+            this.TypeSortListBox.Location = new System.Drawing.Point(308, 12);
             this.TypeSortListBox.Name = "TypeSortListBox";
-            this.TypeSortListBox.Size = new System.Drawing.Size(90, 250);
+            this.TypeSortListBox.Size = new System.Drawing.Size(90, 238);
             this.TypeSortListBox.TabIndex = 6;
             // 
             // rndMinLabel
@@ -233,17 +232,17 @@
             this.randomAddLable.TabIndex = 9;
             this.randomAddLable.Text = "Random add";
             // 
-            // checkBoxVisualise
+            // checkBoxVisualize
             // 
-            this.checkBoxVisualise.AutoSize = true;
-            this.checkBoxVisualise.Checked = true;
-            this.checkBoxVisualise.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxVisualise.Location = new System.Drawing.Point(315, 133);
-            this.checkBoxVisualise.Name = "checkBoxVisualise";
-            this.checkBoxVisualise.Size = new System.Drawing.Size(67, 17);
-            this.checkBoxVisualise.TabIndex = 11;
-            this.checkBoxVisualise.Text = "Visualise";
-            this.checkBoxVisualise.UseVisualStyleBackColor = true;
+            this.checkBoxVisualize.AutoSize = true;
+            this.checkBoxVisualize.Checked = true;
+            this.checkBoxVisualize.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxVisualize.Location = new System.Drawing.Point(404, 133);
+            this.checkBoxVisualize.Name = "checkBoxVisualize";
+            this.checkBoxVisualize.Size = new System.Drawing.Size(67, 17);
+            this.checkBoxVisualize.TabIndex = 11;
+            this.checkBoxVisualize.Text = "Visualize";
+            this.checkBoxVisualize.UseVisualStyleBackColor = true;
             // 
             // panel3
             // 
@@ -285,7 +284,7 @@
             // 
             // panelItemSorted
             // 
-            this.panelItemSorted.Location = new System.Drawing.Point(315, 12);
+            this.panelItemSorted.Location = new System.Drawing.Point(404, 12);
             this.panelItemSorted.Name = "panelItemSorted";
             this.panelItemSorted.Size = new System.Drawing.Size(426, 115);
             this.panelItemSorted.TabIndex = 15;
@@ -295,10 +294,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(837, 250);
+            this.ClientSize = new System.Drawing.Size(839, 250);
             this.Controls.Add(this.panelItemSorted);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.checkBoxVisualise);
+            this.Controls.Add(this.checkBoxVisualize);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.TypeSortListBox);
@@ -334,7 +333,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label addLable;
-        private System.Windows.Forms.CheckBox checkBoxVisualise;
+        private System.Windows.Forms.CheckBox checkBoxVisualize;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TextBox textBoxRandomMax;
         private System.Windows.Forms.Label rndMaxLabel;

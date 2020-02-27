@@ -6,13 +6,8 @@ namespace Algorithms
     public class BubbleSort<T> : AlgorithmsBase<T>
         where T : IComparable
     {
-        public BubbleSort(List<T> items) : base(items)
-        {
-        }
-        public BubbleSort()
-        {
-
-        }
+        public BubbleSort(IEnumerable<T> items) : base(items) { }
+        public BubbleSort() { }
         public override void Sort()
         {
             SwopCount = ComparisonCount = 0;           
@@ -23,8 +18,7 @@ namespace Algorithms
                 {
                     var a = Items[i];
                     var b = Items[i + 1];
-                    ComparisonCount++;
-                    if (a.CompareTo(b) == 1)
+                    if (Compare(a,b) == 1)
                     {
                         Swop(i, i + 1);
                         IsSwoped = true;

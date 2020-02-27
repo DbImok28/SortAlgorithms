@@ -10,7 +10,9 @@ namespace Algorithms
         public List<T> Items { get; set; } = new List<T>();
         public int SwopCount { get; protected set; } = 0;
         public int ComparisonCount { get; protected set; } = 0;
-        public AlgorithmsBase(List<T> items)
+        public event EventHandler<Tuple<T, T>> CompareEvent;
+        public event EventHandler<Tuple<T, T>> SwopEvent;
+        public AlgorithmsBase(IEnumerable<T> items)
         {
             if (items == null)
             {
@@ -31,6 +33,7 @@ namespace Algorithms
                 Items[positionA] = Items[positionB];
                 Items[positionB] = temp;
                 SwopCount++;
+                SwopEvent?.Invoke(this,new Tuple<T, T>(Items[positionA], Items[positionB]));
             }
         }
         public virtual void Sort()
@@ -45,9 +48,16 @@ namespace Algorithms
             sw.Stop();
             return sw.Elapsed;
         }
+        protected int Compare(T a, T b)
+        {
+            ComparisonCount++;
+            CompareEvent?.Invoke(this, new Tuple<T, T>(a, b));
+            return a.CompareTo(b);
+        }
         public override string ToString()
         {
             return "None";
         }
+
     }
 }
