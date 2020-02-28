@@ -22,9 +22,9 @@ namespace Algorithms.Tests
         }
         public void FillRandom(ref List<int> item)
         {
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 2000; i++)
             {
-                item.Add(rnd.Next(0, 100));
+                item.Add(rnd.Next(0, 1000));
             }
         }
         public void SortTest(AlgorithmsBase<int> toSort)
@@ -52,6 +52,11 @@ namespace Algorithms.Tests
         public void InsertionSortTest()
         {
             SortTest(new InsertionSort<int>());
+        }
+        [TestMethod()]
+        public void ShellSortTest()
+        {
+            SortTest(new ShellSort<int>());
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Algorithms
             SwopCount = ComparisonCount = 0;           
             for (int j = 0; j < Items.Count; j++)
             {
-                bool IsSwoped = false;
+                //bool IsSwoped = false;
                 for (int i = 0; i < Items.Count - j - 1; i++)
                 {
                     var a = Items[i];
@@ -21,13 +21,13 @@ namespace Algorithms
                     if (Compare(a,b) == 1)
                     {
                         Swop(i, i + 1);
-                        IsSwoped = true;
+                        //IsSwoped = true;
                     }
                 }
-                if (IsSwoped == false)
-                {
-                    return;
-                }
+                //if (IsSwoped == false)
+                //{
+                //    return;
+                //}
             }           
         }
         public override string ToString()

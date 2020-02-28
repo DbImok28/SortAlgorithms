@@ -24,7 +24,8 @@ namespace Sort
         {
             new BubbleSort<SortedItem>(),
             new CocktailSort<SortedItem>(),
-            new InsertionSort<SortedItem>()
+            new InsertionSort<SortedItem>(),
+            new ShellSort<SortedItem>()
         };
         public Form1()
         {
@@ -93,8 +94,9 @@ namespace Sort
             }
             labelSorted.Text = "";
             //RemoveSortedItems();
-            sorted.Items.Clear();
             ClearPanelItem();
+            sorted.Items.Clear();
+            //sorted.Items = sortedItems;
             sorted.Items.AddRange(sortedItems);
             DisplayPanelItemSorted(sorted.Items);
             if (checkBoxVisualize.Checked)
@@ -115,6 +117,8 @@ namespace Sort
                 return;
             }
             DisplayItems(labelSorted, sorted.Items);
+            sorted.CompareEvent -= BubbleSort_CompareEvent;
+            sorted.SwopEvent -= BubbleSort_SwopEvent;
             //sorted.Items.Clear();
         }
 
