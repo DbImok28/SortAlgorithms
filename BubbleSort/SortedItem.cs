@@ -14,32 +14,23 @@ namespace Sort
         public SortedItem(int value, int number)
         {
             Value = value;
-            Number = number;
+
             ItemVerticalProgressBar = new VerticalProgressBar.VerticalProgressBar();
             ItemLabel = new Label();
-            int x = number * 20;
-            // 
-            // ItemVerticalProgressBar
-            // 
+
+            SetPosition(number);
+
             ItemVerticalProgressBar.BorderStyle = BorderStyles.Classic;
             ItemVerticalProgressBar.Color = Color.Blue;
-            ItemVerticalProgressBar.Location = new Point(x, 0);
             ItemVerticalProgressBar.Maximum = 100;
             ItemVerticalProgressBar.Minimum = 0;
-            ItemVerticalProgressBar.Name = "ItemVerticalProgressBar_" + number;
             ItemVerticalProgressBar.Size = new Size(19, 96);
             ItemVerticalProgressBar.Step = 1;
             ItemVerticalProgressBar.Style = Styles.Solid;
-            ItemVerticalProgressBar.TabIndex = number;
             ItemVerticalProgressBar.Value = Value;
-            // 
-            // ItemLabel
-            // 
+
             ItemLabel.AutoSize = true;
-            ItemLabel.Location = new Point(x, 100);
-            ItemLabel.Name = "ItemLabel_" + number;
             ItemLabel.Size = new Size(19, 13);
-            ItemLabel.TabIndex = number;
             ItemLabel.Text = Value.ToString();
             ItemLabel.TextAlign = ContentAlignment.TopCenter;
         }
