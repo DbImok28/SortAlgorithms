@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using VerticalProgressBar;
+using System.Drawing;
 
 namespace Sort
 {
@@ -9,45 +10,51 @@ namespace Sort
         public VerticalProgressBar.VerticalProgressBar ItemVerticalProgressBar { get; private set; }
         public Label ItemLabel { get; private set; }
         public int Value { get; private set; }
-        public SortedItem(int value,int number)
+        public int Number { get; private set; }
+        public SortedItem(int value, int number)
         {
             Value = value;
+            Number = number;
             ItemVerticalProgressBar = new VerticalProgressBar.VerticalProgressBar();
             ItemLabel = new Label();
             int x = number * 20;
             // 
             // ItemVerticalProgressBar
             // 
-            ItemVerticalProgressBar.BorderStyle = VerticalProgressBar.BorderStyles.Classic;
-            ItemVerticalProgressBar.Color = System.Drawing.Color.Blue;
-            ItemVerticalProgressBar.Location = new System.Drawing.Point(x, 0);
+            ItemVerticalProgressBar.BorderStyle = BorderStyles.Classic;
+            ItemVerticalProgressBar.Color = Color.Blue;
+            ItemVerticalProgressBar.Location = new Point(x, 0);
             ItemVerticalProgressBar.Maximum = 100;
             ItemVerticalProgressBar.Minimum = 0;
             ItemVerticalProgressBar.Name = "ItemVerticalProgressBar_" + number;
-            ItemVerticalProgressBar.Size = new System.Drawing.Size(19, 96);
+            ItemVerticalProgressBar.Size = new Size(19, 96);
             ItemVerticalProgressBar.Step = 1;
-            ItemVerticalProgressBar.Style = VerticalProgressBar.Styles.Solid;
+            ItemVerticalProgressBar.Style = Styles.Solid;
             ItemVerticalProgressBar.TabIndex = number;
             ItemVerticalProgressBar.Value = Value;
             // 
             // ItemLabel
             // 
             ItemLabel.AutoSize = true;
-            ItemLabel.Location = new System.Drawing.Point(x, 100);
+            ItemLabel.Location = new Point(x, 100);
             ItemLabel.Name = "ItemLabel_" + number;
-            ItemLabel.Size = new System.Drawing.Size(19, 13);
+            ItemLabel.Size = new Size(19, 13);
             ItemLabel.TabIndex = number;
             ItemLabel.Text = Value.ToString();
-            ItemLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            ItemLabel.TextAlign = ContentAlignment.TopCenter;
         }
-        public void SetValue(int value)
+        public void SetPosition(int number)
         {
-            Value = value;
-            ItemVerticalProgressBar.Value = Value;
-            ItemLabel.Text = Value.ToString();
-
+            Number = number;
+            int x = number * 20;
+            ItemVerticalProgressBar.Location = new Point(x, 0);           
+            ItemVerticalProgressBar.Name = "ItemVerticalProgressBar_" + number;           
+            ItemVerticalProgressBar.TabIndex = number;         
+            ItemLabel.Location = new Point(x, 100);
+            ItemLabel.Name = "ItemLabel_" + number;
+            ItemLabel.TabIndex = number;
         }
-        public void SetColor(System.Drawing.Color color)
+        public void SetColor(Color color)
         {
             ItemVerticalProgressBar.Color = color;
         }

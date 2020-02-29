@@ -69,8 +69,8 @@ namespace Sort
                         {
                             int value = rnd.Next(min, max);
                             toSort.Items.Add(value);
-                            DisplayPanelItemSorted(toSort.Items,out sortedItems);
                         }
+                        DisplayPanelItemSorted(toSort.Items,out sortedItems);
                         DisplayItems(labelToSort, toSort.Items);
                     }
                 }
@@ -97,14 +97,30 @@ namespace Sort
             ClearPanelItem();
             sorted.Items.Clear();
             //sorted.Items = sortedItems;
-            sorted.Items.AddRange(sortedItems);
+            //sorted.Items.AddRange(sortedItems);
+            sorted.Items = ConvertToSortedItem(toSort.Items);
             DisplayPanelItemSorted(sorted.Items);
             if (checkBoxVisualize.Checked)
             {
                 if (sorted is BubbleSort<SortedItem>)
                 {
-                    sorted.CompareEvent += BubbleSort_CompareEvent;
-                    sorted.SwopEvent += BubbleSort_SwopEvent;
+                    sorted.CompareEvent += CompareEvent;
+                    sorted.SwopEvent += SwopEvent;
+                }
+                if (sorted is CocktailSort<SortedItem>)
+                {
+                    sorted.CompareEvent += CompareEvent;
+                    sorted.SwopEvent += SwopEvent;
+                }
+                if (sorted is InsertionSort<SortedItem>)
+                {
+                    sorted.CompareEvent += CompareEvent;
+                    sorted.SwopEvent += SwopEvent;
+                }
+                if (sorted is ShellSort<SortedItem>)
+                {
+                    sorted.CompareEvent += CompareEvent;
+                    sorted.SwopEvent += SwopEvent;
                 }
             }
             try
@@ -117,19 +133,19 @@ namespace Sort
                 return;
             }
             DisplayItems(labelSorted, sorted.Items);
-            sorted.CompareEvent -= BubbleSort_CompareEvent;
-            sorted.SwopEvent -= BubbleSort_SwopEvent;
+            sorted.CompareEvent -= CompareEvent;
+            sorted.SwopEvent -= SwopEvent;
             //sorted.Items.Clear();
         }
 
-        private void BubbleSort_SwopEvent(object sender, Tuple<SortedItem, SortedItem> e)
+        private void SwopEvent(object sender, Tuple<SortedItem, SortedItem> e)
         {
-            int temp = e.Item1.Value;
-            e.Item1.SetValue(e.Item2.Value);
-            e.Item2.SetValue(temp);
+            int temp = e.Item1.Number;
+            e.Item1.SetPosition(e.Item2.Number);
+            e.Item2.SetPosition(temp);
             panelItemSorted.Refresh();
         }
-        private void BubbleSort_CompareEvent(object sender, Tuple<SortedItem, SortedItem> e)
+        private void CompareEvent(object sender, Tuple<SortedItem, SortedItem> e)
         {
             e.Item1.SetColor(Color.Red);
             e.Item2.SetColor(Color.DarkRed);
@@ -217,6 +233,18 @@ namespace Sort
             panelItemSorted.Refresh();
         }
         
+        public List<SortedItem> ConvertToSortedItem(List<int> items)
+        {
+            var result = new List<SortedItem>();
+            int number = 0;
+            foreach (var item in items)
+            {
+                result.Add(new SortedItem(item, number));
+                number++;
+            }
+            return result;
+        }
+
         public void RemoveSortedItems()
         {
             //foreach (var item in sortedItems)
