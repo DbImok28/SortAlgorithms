@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Algorithms;
+using Algorithms.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,7 @@ namespace Algorithms.Tests
         public void SortTest(AlgorithmsBase<int> toSort)
         {
             FillRandom(ref Item);
-            toSort.Items.AddRange(Item);
+            toSort.AddRange(Item);
             Item.Sort();
             toSort.TimeToSort();
             for (int i = 0; i < Item.Count; i++)

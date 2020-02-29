@@ -50,7 +50,7 @@ namespace Sort
             {
                 if (int.TryParse(item.ToString(), out int value))
                 {
-                    toSort.Items.Add(value);
+                    toSort.Add(value);
                 }
             }
             textBoxAdd.Clear();
@@ -95,13 +95,13 @@ namespace Sort
             labelSorted.Text = "";
             ClearPanelItem();
             sorted.Items.Clear();
-            sorted.Items = ConvertToSortedItem(toSort.Items);
-            DisplayPanelItemSorted(sorted.Items);
             if (checkBoxVisualize.Checked)
             {
                 sorted.CompareEvent += CompareEvent;
                 sorted.SwopEvent += SwopEvent;
             }
+            sorted.AddRange(ConvertToSortedItem(toSort.Items));
+            DisplayPanelItemSorted(sorted.Items);
             try
             {
                 time = sorted.TimeToSort();
@@ -122,6 +122,7 @@ namespace Sort
             int temp = e.Item1.Number;
             e.Item1.SetPosition(e.Item2.Number);
             e.Item2.SetPosition(temp);
+
             panelItemSorted.Refresh();
         }
         private void CompareEvent(object sender, Tuple<SortedItem, SortedItem> e)
@@ -129,12 +130,15 @@ namespace Sort
             e.Item1.SetColor(Color.Red);
             e.Item2.SetColor(Color.Green);
             panelItemSorted.Refresh();
+
             if (int.TryParse(textBoxSpeed.Text, out int speed))
             {
                 Thread.Sleep(speed);
             }
+
             e.Item1.SetColor(Color.Blue);
             e.Item2.SetColor(Color.Blue);
+            panelItemSorted.Refresh();
         }
 
         public void DisplayItems(Label label, List<int> items)

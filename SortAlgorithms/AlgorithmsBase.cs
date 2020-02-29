@@ -7,12 +7,14 @@ namespace Algorithms
     public class AlgorithmsBase<T>
         where T : IComparable
     {
-        public List<T> Items { get; set; } = new List<T>();
+        public List<T> Items { get; protected set; } = new List<T>();
         public int SwopCount { get; protected set; } = 0;
         public int ComparisonCount { get; protected set; } = 0;
         public event EventHandler<Tuple<T, T>> CompareEvent;
         public event EventHandler<Tuple<T, T>> SwopEvent;
         public Stopwatch Timer { get; private set; }
+
+        public AlgorithmsBase() { }   
         public AlgorithmsBase(IEnumerable<T> items)
         {
             if (items == null)
@@ -20,23 +22,21 @@ namespace Algorithms
                 throw new ArgumentNullException(nameof(items));
             }
 
-            Items.AddRange(items);
+            AddRange(items);
         }
-        public AlgorithmsBase()
+        
+        public virtual void Add(T item)
         {
-
-        }       
-        protected void Swop(int positionA, int positionB)
+            Items.Add(item);
+        }
+        public void AddRange(IEnumerable<T> items)
         {
-            if (positionA < Items.Count && positionB < Items.Count)
+            foreach (var item in items)
             {
-                SwopEvent?.Invoke(this,new Tuple<T, T>(Items[positionA], Items[positionB]));
-                SwopCount++;
-                T temp = Items[positionA];
-                Items[positionA] = Items[positionB];
-                Items[positionB] = temp;
+                Add(item);
             }
         }
+
         protected virtual void Sort()
         {
             throw new NotImplementedException();
@@ -49,6 +49,18 @@ namespace Algorithms
             Sort();
             Timer.Stop();
             return Timer.Elapsed;
+        }
+
+        protected void Swop(int positionA, int positionB)
+        {
+            if (positionA < Items.Count && positionB < Items.Count)
+            {
+                SwopEvent?.Invoke(this,new Tuple<T, T>(Items[positionA], Items[positionB]));
+                SwopCount++;
+                T temp = Items[positionA];
+                Items[positionA] = Items[positionB];
+                Items[positionB] = temp;
+            }
         }
         protected int Compare(T a, T b)
         {
