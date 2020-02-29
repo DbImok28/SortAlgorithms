@@ -8,9 +8,8 @@ namespace Algorithms
     {
         public ShellSort(IEnumerable<T> items) : base(items) { }
         public ShellSort() { }
-        public override void Sort()
+        protected override void Sort()
         {
-            SwopCount = ComparisonCount = 0;
             int step = Items.Count / 2;
             while(step > 0)
             {
@@ -25,7 +24,6 @@ namespace Algorithms
                 }
                 step /= 2;
             }
-
         }
         public override string ToString()
         {

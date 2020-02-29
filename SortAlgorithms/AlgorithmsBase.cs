@@ -36,12 +36,13 @@ namespace Algorithms
                 Items[positionB] = temp;
             }
         }
-        public virtual void Sort()
+        protected virtual void Sort()
         {
             throw new NotImplementedException();
-        }
+        }        
         public TimeSpan TimeToSort()
         {
+            SwopCount = ComparisonCount = 0;
             var sw = new Stopwatch();
             sw.Start();
             Sort();

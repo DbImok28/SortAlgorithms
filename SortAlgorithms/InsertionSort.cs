@@ -8,9 +8,8 @@ namespace Algorithms
     {
         public InsertionSort(IEnumerable<T> items) : base(items) { }
         public InsertionSort() { }
-        public override void Sort()
+        protected override void Sort()
         {
-            SwopCount = ComparisonCount = 0;
             for (int i = 1; i < Items.Count; i++)
             {
                 T temp = Items[i];

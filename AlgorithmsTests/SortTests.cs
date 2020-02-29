@@ -32,7 +32,7 @@ namespace Algorithms.Tests
             FillRandom(ref Item);
             toSort.Items.AddRange(Item);
             Item.Sort();
-            toSort.Sort();
+            toSort.TimeToSort();
             for (int i = 0; i < Item.Count; i++)
             {
                 Assert.AreEqual(toSort.Items[i], Item[i]);
@@ -57,6 +57,16 @@ namespace Algorithms.Tests
         public void ShellSortTest()
         {
             SortTest(new ShellSort<int>());
+        }
+        [TestMethod()]
+        public void TreeSortTest()
+        {
+            SortTest(new TreeSort<int>());
+        }
+        [TestMethod()]
+        public void HeapSortTest()
+        {
+            SortTest(new HeapSort<int>());
         }
     }
 }

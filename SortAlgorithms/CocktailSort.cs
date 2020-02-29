@@ -8,9 +8,8 @@ namespace Algorithms
     {
         public CocktailSort(IEnumerable<T> items) : base(items) { }
         public CocktailSort() { }
-        public override void Sort()
+        protected override void Sort()
         {
-            SwopCount = ComparisonCount = 0;
             int left = 0;
             int right = Items.Count - 1;
             while (right > left)

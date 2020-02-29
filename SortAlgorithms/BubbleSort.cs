@@ -8,9 +8,8 @@ namespace Algorithms
     {
         public BubbleSort(IEnumerable<T> items) : base(items) { }
         public BubbleSort() { }
-        public override void Sort()
-        {
-            SwopCount = ComparisonCount = 0;           
+        protected override void Sort()
+        {      
             for (int j = 0; j < Items.Count; j++)
             {
                 //bool IsSwoped = false;

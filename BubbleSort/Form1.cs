@@ -24,7 +24,9 @@ namespace Sort
             new BubbleSort<SortedItem>(),
             new CocktailSort<SortedItem>(),
             new InsertionSort<SortedItem>(),
-            new ShellSort<SortedItem>()
+            new ShellSort<SortedItem>(),
+            new TreeSort<SortedItem>(),
+            new HeapSort<SortedItem>()
         };
         public Form1()
         {
