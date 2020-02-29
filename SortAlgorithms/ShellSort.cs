@@ -10,6 +10,7 @@ namespace Algorithms
         public ShellSort() { }
         public override void Sort()
         {
+            SwopCount = ComparisonCount = 0;
             int step = Items.Count / 2;
             while(step > 0)
             {

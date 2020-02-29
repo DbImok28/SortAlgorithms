@@ -16,7 +16,6 @@ namespace Sort
     public partial class Form1 : Form
     {
         Random rnd = new Random();
-        List<SortedItem> sortedItems = new List<SortedItem>();
 
         AlgorithmsBase<int> toSort = new AlgorithmsBase<int>();
 
@@ -41,22 +40,20 @@ namespace Sort
         {
 
         }
-      
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             MatchCollection matchCollection = Regex.Matches(textBoxAdd.Text, @"(\d*)", RegexOptions.Singleline);
             foreach (var item in matchCollection)
             {
-                if (int.TryParse(item.ToString(),out int value))
-                {                    
-                    textBoxAdd.Clear();
+                if (int.TryParse(item.ToString(), out int value))
+                {
                     toSort.Items.Add(value);
-                    DisplayItems(labelToSort, toSort.Items);
-                    DisplayPanelItemSorted(toSort.Items,out sortedItems);
                 }
             }
+            textBoxAdd.Clear();
+            DisplayItems(labelToSort, toSort.Items);
+            DisplayPanelItemSorted(toSort.Items);
         }
-
         private void buttonAddRandom_Click(object sender, EventArgs e)
         {
             if (int.TryParse(textBoxRandomMin.Text, out int min))
@@ -65,25 +62,24 @@ namespace Sort
                 {
                     if (int.TryParse(textBoxRandomCount.Text, out int count))
                     {
-                        for (int i = 0; i < count + 1; i++)
+                        for (int i = 0; i < count; i++)
                         {
                             int value = rnd.Next(min, max);
                             toSort.Items.Add(value);
                         }
-                        DisplayPanelItemSorted(toSort.Items,out sortedItems);
+                        //DisplayPanelItemSorted(toSort.Items,out sortedItems);
+                        DisplayPanelItemSorted(toSort.Items);
                         DisplayItems(labelToSort, toSort.Items);
                     }
                 }
             }
         }
-
         private void buttonClear_Click(object sender, EventArgs e)
         {
             toSort.Items.Clear();
             labelToSort.Text = labelSorted.Text = "";
             RemoveSortedItems();
         }
-
         private void buttonSort_Click(object sender, EventArgs e)
         {
             AlgorithmsBase<SortedItem> sorted = (AlgorithmsBase<SortedItem>)TypeSortListBox.SelectedItem;
@@ -92,40 +88,20 @@ namespace Sort
                 labelSorted.Text = "Type sort is not selected";
                 return;
             }
+            TimeSpan time;
             labelSorted.Text = "";
-            //RemoveSortedItems();
             ClearPanelItem();
             sorted.Items.Clear();
-            //sorted.Items = sortedItems;
-            //sorted.Items.AddRange(sortedItems);
             sorted.Items = ConvertToSortedItem(toSort.Items);
             DisplayPanelItemSorted(sorted.Items);
             if (checkBoxVisualize.Checked)
             {
-                if (sorted is BubbleSort<SortedItem>)
-                {
-                    sorted.CompareEvent += CompareEvent;
-                    sorted.SwopEvent += SwopEvent;
-                }
-                if (sorted is CocktailSort<SortedItem>)
-                {
-                    sorted.CompareEvent += CompareEvent;
-                    sorted.SwopEvent += SwopEvent;
-                }
-                if (sorted is InsertionSort<SortedItem>)
-                {
-                    sorted.CompareEvent += CompareEvent;
-                    sorted.SwopEvent += SwopEvent;
-                }
-                if (sorted is ShellSort<SortedItem>)
-                {
-                    sorted.CompareEvent += CompareEvent;
-                    sorted.SwopEvent += SwopEvent;
-                }
+                sorted.CompareEvent += CompareEvent;
+                sorted.SwopEvent += SwopEvent;
             }
             try
             {
-                var time = sorted.TimeToSort();
+                time = sorted.TimeToSort();
             }
             catch (NotImplementedException)
             {
@@ -133,9 +109,11 @@ namespace Sort
                 return;
             }
             DisplayItems(labelSorted, sorted.Items);
+            timeLabel.Text = "Time: " + time.TotalSeconds.ToString() + " s";
+            comparisonsLabel.Text = "Comparisons: " + sorted.ComparisonCount;
+            swopLabel.Text = "Swops: " + sorted.SwopCount;
             sorted.CompareEvent -= CompareEvent;
             sorted.SwopEvent -= SwopEvent;
-            //sorted.Items.Clear();
         }
 
         private void SwopEvent(object sender, Tuple<SortedItem, SortedItem> e)
@@ -186,18 +164,14 @@ namespace Sort
         }
 
         public void DisplayPanelItemSorted(List<int> items)
-        {
-            foreach (var item in sortedItems)
-            {
-                panelItemSorted.Controls.Remove(item.ItemLabel);
-                panelItemSorted.Controls.Remove(item.ItemVerticalProgressBar);
-            }
-            sortedItems.Clear();
+        {            
+            ClearPanelItem();
+            //sortedItems.Clear();
             int number = 0;
             foreach (var value in items)
             {
                 var sortedItem = new SortedItem(value, number);
-                sortedItems.Add(sortedItem);
+                //sortedItems.Add(sortedItem);
                 panelItemSorted.Controls.Add(sortedItem.ItemVerticalProgressBar);
                 panelItemSorted.Controls.Add(sortedItem.ItemLabel);
                 number++;
@@ -244,15 +218,9 @@ namespace Sort
             }
             return result;
         }
-
         public void RemoveSortedItems()
         {
-            //foreach (var item in sortedItems)
-            //{
-            //    panelItemSorted.Controls.Remove(item.ItemLabel);
-            //    panelItemSorted.Controls.Remove(item.ItemVerticalProgressBar);
-            //}
-            sortedItems.Clear();
+            //sortedItems.Clear();
             ClearPanelItem();
         }
         public void ClearPanelItem()

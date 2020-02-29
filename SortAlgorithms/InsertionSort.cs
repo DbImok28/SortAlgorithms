@@ -17,8 +17,9 @@ namespace Algorithms
                 int j = i;
                 while (j > 0 && Compare(temp,Items[j - 1]) == -1)
                 {
-                    SwopCount++;
-                    Items[j] = Items[j - 1];
+                    //SwopCount++;
+                    Swop(j, j - 1);
+                    //Items[j] = Items[j - 1];
                     j--;
                 }
                 Items[j] = temp;

@@ -51,6 +51,13 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panelItemSorted = new System.Windows.Forms.Panel();
+            this.textBoxSpeed = new System.Windows.Forms.TextBox();
+            this.Speedlabel = new System.Windows.Forms.Label();
+            this.timeLabel = new System.Windows.Forms.Label();
+            this.comparisonsLabel = new System.Windows.Forms.Label();
+            this.swopLabel = new System.Windows.Forms.Label();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.patternLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -59,6 +66,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonAdd
@@ -123,7 +131,7 @@
             this.TypeSortListBox.FormattingEnabled = true;
             this.TypeSortListBox.Location = new System.Drawing.Point(308, 12);
             this.TypeSortListBox.Name = "TypeSortListBox";
-            this.TypeSortListBox.Size = new System.Drawing.Size(90, 238);
+            this.TypeSortListBox.Size = new System.Drawing.Size(90, 225);
             this.TypeSortListBox.TabIndex = 6;
             // 
             // rndMinLabel
@@ -138,6 +146,7 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.patternLabel);
             this.panel1.Controls.Add(this.addLable);
             this.panel1.Controls.Add(this.textBoxAdd);
             this.panel1.Controls.Add(this.buttonAdd);
@@ -237,7 +246,7 @@
             this.checkBoxVisualize.AutoSize = true;
             this.checkBoxVisualize.Checked = true;
             this.checkBoxVisualize.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxVisualize.Location = new System.Drawing.Point(404, 133);
+            this.checkBoxVisualize.Location = new System.Drawing.Point(492, 135);
             this.checkBoxVisualize.Name = "checkBoxVisualize";
             this.checkBoxVisualize.Size = new System.Drawing.Size(67, 17);
             this.checkBoxVisualize.TabIndex = 11;
@@ -284,17 +293,85 @@
             // 
             // panelItemSorted
             // 
+            this.panelItemSorted.AutoSize = true;
             this.panelItemSorted.Location = new System.Drawing.Point(404, 12);
             this.panelItemSorted.Name = "panelItemSorted";
-            this.panelItemSorted.Size = new System.Drawing.Size(426, 115);
+            this.panelItemSorted.Size = new System.Drawing.Size(438, 115);
             this.panelItemSorted.TabIndex = 15;
+            // 
+            // textBoxSpeed
+            // 
+            this.textBoxSpeed.Location = new System.Drawing.Point(440, 133);
+            this.textBoxSpeed.Name = "textBoxSpeed";
+            this.textBoxSpeed.Size = new System.Drawing.Size(46, 20);
+            this.textBoxSpeed.TabIndex = 19;
+            this.textBoxSpeed.Text = "0,5";
+            // 
+            // Speedlabel
+            // 
+            this.Speedlabel.AutoSize = true;
+            this.Speedlabel.Location = new System.Drawing.Point(403, 136);
+            this.Speedlabel.Name = "Speedlabel";
+            this.Speedlabel.Size = new System.Drawing.Size(38, 13);
+            this.Speedlabel.TabIndex = 18;
+            this.Speedlabel.Text = "Speed";
+            // 
+            // timeLabel
+            // 
+            this.timeLabel.AutoSize = true;
+            this.timeLabel.Location = new System.Drawing.Point(3, 3);
+            this.timeLabel.Name = "timeLabel";
+            this.timeLabel.Size = new System.Drawing.Size(30, 13);
+            this.timeLabel.TabIndex = 0;
+            this.timeLabel.Text = "Time";
+            // 
+            // comparisonsLabel
+            // 
+            this.comparisonsLabel.AutoSize = true;
+            this.comparisonsLabel.Location = new System.Drawing.Point(3, 20);
+            this.comparisonsLabel.Name = "comparisonsLabel";
+            this.comparisonsLabel.Size = new System.Drawing.Size(67, 13);
+            this.comparisonsLabel.TabIndex = 1;
+            this.comparisonsLabel.Text = "Comparisons";
+            // 
+            // swopLabel
+            // 
+            this.swopLabel.AutoSize = true;
+            this.swopLabel.Location = new System.Drawing.Point(3, 37);
+            this.swopLabel.Name = "swopLabel";
+            this.swopLabel.Size = new System.Drawing.Size(39, 13);
+            this.swopLabel.TabIndex = 2;
+            this.swopLabel.Text = "Swops";
+            // 
+            // panel5
+            // 
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel5.Controls.Add(this.comparisonsLabel);
+            this.panel5.Controls.Add(this.swopLabel);
+            this.panel5.Controls.Add(this.timeLabel);
+            this.panel5.Location = new System.Drawing.Point(406, 177);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(113, 58);
+            this.panel5.TabIndex = 20;
+            // 
+            // patternLabel
+            // 
+            this.patternLabel.AutoSize = true;
+            this.patternLabel.Location = new System.Drawing.Point(4, 46);
+            this.patternLabel.Name = "patternLabel";
+            this.patternLabel.Size = new System.Drawing.Size(74, 13);
+            this.patternLabel.TabIndex = 7;
+            this.patternLabel.Text = "Pattern(# # #)";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(839, 250);
+            this.ClientSize = new System.Drawing.Size(852, 250);
+            this.Controls.Add(this.panel5);
+            this.Controls.Add(this.textBoxSpeed);
+            this.Controls.Add(this.Speedlabel);
             this.Controls.Add(this.panelItemSorted);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.checkBoxVisualize);
@@ -315,6 +392,8 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -345,6 +424,13 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Panel panelItemSorted;
+        private System.Windows.Forms.TextBox textBoxSpeed;
+        private System.Windows.Forms.Label Speedlabel;
+        private System.Windows.Forms.Label comparisonsLabel;
+        private System.Windows.Forms.Label timeLabel;
+        private System.Windows.Forms.Label swopLabel;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Label patternLabel;
     }
 }
 
