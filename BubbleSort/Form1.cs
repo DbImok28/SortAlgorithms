@@ -22,6 +22,7 @@ namespace Sort
         List<AlgorithmsBase<SortedItem>> TypeSort = new List<AlgorithmsBase<SortedItem>>()
         {
             new BubbleSort<SortedItem>(),
+            new SelectionSort<SortedItem>(),
             new CocktailSort<SortedItem>(),
             new InsertionSort<SortedItem>(),
             new ShellSort<SortedItem>(),
@@ -111,9 +112,7 @@ namespace Sort
                 return;
             }
             DisplayItems(labelSorted, sorted.Items);
-            timeLabel.Text = "Time: " + time.TotalSeconds.ToString() + " s";
-            comparisonsLabel.Text = "Comparisons: " + sorted.ComparisonCount;
-            swopLabel.Text = "Swops: " + sorted.SwopCount;
+            DisplaySortStatistic(sorted, time);
             sorted.CompareEvent -= CompareEvent;
             sorted.SwopEvent -= SwopEvent;
         }
@@ -128,8 +127,12 @@ namespace Sort
         private void CompareEvent(object sender, Tuple<SortedItem, SortedItem> e)
         {
             e.Item1.SetColor(Color.Red);
-            e.Item2.SetColor(Color.DarkRed);
+            e.Item2.SetColor(Color.Green);
             panelItemSorted.Refresh();
+            if (int.TryParse(textBoxSpeed.Text, out int speed))
+            {
+                Thread.Sleep(speed);
+            }
             e.Item1.SetColor(Color.Blue);
             e.Item2.SetColor(Color.Blue);
         }
@@ -207,6 +210,13 @@ namespace Sort
                 number++;
             }
             panelItemSorted.Refresh();
+        }
+
+        public void DisplaySortStatistic(AlgorithmsBase<SortedItem> sort, TimeSpan time)
+        {
+            timeLabel.Text = "Time: " + time.TotalSeconds.ToString() + " s";
+            comparisonsLabel.Text = "Comparisons: " + sort.ComparisonCount;
+            swopLabel.Text = "Swops: " + sort.SwopCount;
         }
         
         public List<SortedItem> ConvertToSortedItem(List<int> items)

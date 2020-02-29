@@ -9,13 +9,13 @@ namespace Algorithms
     {
         public TreeSort(IEnumerable<T> items) : base(items) { }
         public TreeSort() { }
-        protected override void Sort()
-        {         
-            Items = new BinarySearchTree<T>(Items).Inorder();
-        }
         public override string ToString()
         {
             return "TreeSort";
+        }
+        protected override void Sort()
+        {         
+            Items = new BinarySearchTree<T>(Items).Inorder();
         }
     }
 }

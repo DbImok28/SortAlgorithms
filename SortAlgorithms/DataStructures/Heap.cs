@@ -9,6 +9,8 @@ namespace Algorithms.Model
     {
         private List<T> items = new List<T>();
         public int Count => items.Count;
+        public event EventHandler<Tuple<T, T>> SwopEvent;
+
         public Heap()
         {
 
@@ -50,13 +52,14 @@ namespace Algorithms.Model
             var parentIndex = GetParentIndex(currentIndex);
             while (currentIndex > 0 && items[parentIndex].CompareTo(items[currentIndex]) == 1)
             {
-                Swap(currentIndex, parentIndex);
+                Swop(currentIndex, parentIndex);
                 currentIndex = parentIndex;
                 parentIndex = GetParentIndex(currentIndex);
             }
         }
-        private void Swap(int currentIndex, int parentIndex)
+        private void Swop(int currentIndex, int parentIndex)
         {
+            SwopEvent?.Invoke(this, new Tuple<T, T>(items[currentIndex], items[parentIndex]));
             var temp = items[currentIndex];
             items[currentIndex] = items[parentIndex];
             items[parentIndex] = temp;
@@ -93,7 +96,7 @@ namespace Algorithms.Model
                 {
                     break;
                 }
-                Swap(currentIndex, maxIndex);
+                Swop(currentIndex, maxIndex);
                 currentIndex = maxIndex;
             }
 

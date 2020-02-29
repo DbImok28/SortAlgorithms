@@ -8,6 +8,10 @@ namespace Algorithms
     {
         public BubbleSort(IEnumerable<T> items) : base(items) { }
         public BubbleSort() { }
+        public override string ToString()
+        {
+            return "BubbleSort";
+        }
         protected override void Sort()
         {      
             for (int j = 0; j < Items.Count; j++)
@@ -28,10 +32,6 @@ namespace Algorithms
                 //    return;
                 //}
             }           
-        }
-        public override string ToString()
-        {
-            return "BubbleSort";
         }
     }
 }

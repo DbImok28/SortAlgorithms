@@ -8,6 +8,10 @@ namespace Algorithms
     {
         public InsertionSort(IEnumerable<T> items) : base(items) { }
         public InsertionSort() { }
+        public override string ToString()
+        {
+            return "InsertionSort";
+        }
         protected override void Sort()
         {
             for (int i = 1; i < Items.Count; i++)
@@ -23,10 +27,6 @@ namespace Algorithms
                 }
                 Items[j] = temp;
             }
-        }
-        public override string ToString()
-        {
-            return "InsertionSort";
         }
     }
 }

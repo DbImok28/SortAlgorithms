@@ -48,6 +48,7 @@
     <Compile Include="DataStructures\BinarySearchTreeNode.cs" />
     <Compile Include="DataStructures\Heap.cs" />
     <Compile Include="HeapSort.cs" />
+    <Compile Include="SelectionSort.cs" />
     <Compile Include="ShellSort.cs" />
     <Compile Include="InsertionSort.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

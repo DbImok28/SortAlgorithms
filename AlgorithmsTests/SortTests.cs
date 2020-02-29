@@ -22,7 +22,7 @@ namespace Algorithms.Tests
         }
         public void FillRandom(ref List<int> item)
         {
-            for (int i = 0; i < 2000; i++)
+            for (int i = 0; i < 1000; i++)
             {
                 item.Add(rnd.Next(0, 1000));
             }
@@ -67,6 +67,11 @@ namespace Algorithms.Tests
         public void HeapSortTest()
         {
             SortTest(new HeapSort<int>());
+        }
+        [TestMethod()]
+        public void SelectionSortTest()
+        {
+            SortTest(new SelectionSort<int>());
         }
     }
 }

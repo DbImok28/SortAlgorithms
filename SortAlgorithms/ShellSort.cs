@@ -8,6 +8,10 @@ namespace Algorithms
     {
         public ShellSort(IEnumerable<T> items) : base(items) { }
         public ShellSort() { }
+        public override string ToString()
+        {
+            return "ShellSort";
+        }
         protected override void Sort()
         {
             int step = Items.Count / 2;
@@ -24,10 +28,6 @@ namespace Algorithms
                 }
                 step /= 2;
             }
-        }
-        public override string ToString()
-        {
-            return "ShellSort";
         }
     }
 }

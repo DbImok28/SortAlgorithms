@@ -305,7 +305,7 @@
             this.textBoxSpeed.Name = "textBoxSpeed";
             this.textBoxSpeed.Size = new System.Drawing.Size(46, 20);
             this.textBoxSpeed.TabIndex = 19;
-            this.textBoxSpeed.Text = "0,5";
+            this.textBoxSpeed.Text = "0";
             // 
             // Speedlabel
             // 

@@ -12,6 +12,7 @@ namespace Algorithms
         public int ComparisonCount { get; protected set; } = 0;
         public event EventHandler<Tuple<T, T>> CompareEvent;
         public event EventHandler<Tuple<T, T>> SwopEvent;
+        public Stopwatch Timer { get; private set; }
         public AlgorithmsBase(IEnumerable<T> items)
         {
             if (items == null)
@@ -43,11 +44,11 @@ namespace Algorithms
         public TimeSpan TimeToSort()
         {
             SwopCount = ComparisonCount = 0;
-            var sw = new Stopwatch();
-            sw.Start();
+            Timer = new Stopwatch();
+            Timer.Start();
             Sort();
-            sw.Stop();
-            return sw.Elapsed;
+            Timer.Stop();
+            return Timer.Elapsed;
         }
         protected int Compare(T a, T b)
         {

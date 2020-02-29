@@ -9,13 +9,14 @@ namespace Algorithms
     {
         public HeapSort(IEnumerable<T> items) : base(items) { }
         public HeapSort() { }
-        protected override void Sort()
-        {
-            Items = new Heap<T>(Items).ToList();
-        }
         public override string ToString()
         {
             return "HeapSort";
+        }
+        protected override void Sort()
+        {
+            var heap = new Heap<T>(Items);
+            Items = heap.ToList();
         }
     }
 }

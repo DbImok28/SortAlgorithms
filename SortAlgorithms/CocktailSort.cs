@@ -8,6 +8,10 @@ namespace Algorithms
     {
         public CocktailSort(IEnumerable<T> items) : base(items) { }
         public CocktailSort() { }
+        public override string ToString()
+        {
+            return "CocktailSort";
+        }
         protected override void Sort()
         {
             int left = 0;
@@ -42,10 +46,6 @@ namespace Algorithms
                 }
                 left++;
             }
-        }
-        public override string ToString()
-        {
-            return "CocktailSort";
         }
     }
 }
