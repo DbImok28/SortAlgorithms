@@ -27,7 +27,7 @@ namespace Sort
             new CocktailSort<SortedItem>(),
             new InsertionSort<SortedItem>(),
             new ShellSort<SortedItem>(),
-            new TreeSort<SortedItem>(),
+            new Algorithms.Model.BinarySearchTree<SortedItem>(),
             new HeapSort<SortedItem>()
         };
         public Form1()
@@ -60,22 +60,19 @@ namespace Sort
         }
         private void buttonAddRandom_Click(object sender, EventArgs e)
         {
-            if (int.TryParse(textBoxRandomMin.Text, out int min))
+            if (int.TryParse(textBoxRandomMin.Text, out int min) &&
+                int.TryParse(textBoxRandomMax.Text, out int max) &&
+                int.TryParse(textBoxRandomCount.Text, out int count) &&
+                max >= min &&
+                count > 0)
             {
-                if (int.TryParse(textBoxRandomMax.Text, out int max))
+                for (int i = 0; i < count; i++)
                 {
-                    if (int.TryParse(textBoxRandomCount.Text, out int count))
-                    {
-                        for (int i = 0; i < count; i++)
-                        {
-                            int value = rnd.Next(min, max);
-                            toSort.Items.Add(value);
-                        }
-                        //DisplayPanelItemSorted(toSort.Items,out sortedItems);
-                        DisplayPanelItemSorted(toSort.Items);
-                        DisplayItems(labelToSort, toSort.Items);
-                    }
+                    int value = rnd.Next(min, max);
+                    toSort.Items.Add(value);
                 }
+                DisplayPanelItemSorted(toSort.Items);
+                DisplayItems(labelToSort, toSort.Items);
             }
         }
         private void buttonClear_Click(object sender, EventArgs e)

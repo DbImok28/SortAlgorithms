@@ -62,7 +62,7 @@ namespace Algorithms.Tests
         [TestMethod()]
         public void TreeSortTest()
         {
-            SortTest(new TreeSort<int>());
+            SortTest(new Algorithms.Model.BinarySearchTree<int>());
         }
         [TestMethod()]
         public void HeapSortTest()
