@@ -22,6 +22,7 @@ namespace Sort
         List<AlgorithmsBase<SortedItem>> TypeSort = new List<AlgorithmsBase<SortedItem>>()
         {
             new BubbleSort<SortedItem>(),
+            new GnomeSort<SortedItem>(),
             new SelectionSort<SortedItem>(),
             new CocktailSort<SortedItem>(),
             new InsertionSort<SortedItem>(),

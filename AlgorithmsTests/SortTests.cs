@@ -74,5 +74,10 @@ namespace Algorithms.Tests
         {
             SortTest(new SelectionSort<int>());
         }
+        [TestMethod()]
+        public void GnomeSortTest()
+        {
+            SortTest(new GnomeSort<int>());
+        }
     }
 }

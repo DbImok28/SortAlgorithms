@@ -10,19 +10,19 @@ namespace Algorithms
         public HeapSort() { }
         public HeapSort(IEnumerable<T> items) : base(items) { }
 
-        private void Balance(int currentIndex, int maxLenght)
+        private void Balance(int currentIndex, int maxCount)
         {
             int leftIndex, rightIndex, maxIndex;
             maxIndex = currentIndex;
-            while (currentIndex < maxLenght)
+            while (currentIndex < maxCount)
             {
                 leftIndex = currentIndex * 2 + 1;
                 rightIndex = currentIndex * 2 + 2;
-                if (leftIndex < maxLenght && Compare(Items[leftIndex], Items[maxIndex]) == 1)
+                if (leftIndex < maxCount && Compare(Items[leftIndex], Items[maxIndex]) == 1)
                 {
                     maxIndex = leftIndex;
                 }
-                if (rightIndex < maxLenght && Compare(Items[rightIndex], Items[maxIndex]) == 1)
+                if (rightIndex < maxCount && Compare(Items[rightIndex], Items[maxIndex]) == 1)
                 {
                     maxIndex = rightIndex;
                 }
