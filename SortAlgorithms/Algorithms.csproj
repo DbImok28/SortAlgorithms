@@ -48,7 +48,7 @@
     <Compile Include="DataStructures\BinarySearchTreeNode.cs" />
     <Compile Include="GnomeSort.cs" />
     <Compile Include="HeapSort.cs" />
-    <Compile Include="RadixSort.cs" />
+    <Compile Include="LSDRadixSort.cs" />
     <Compile Include="SelectionSort.cs" />
     <Compile Include="ShellSort.cs" />
     <Compile Include="InsertionSort.cs" />

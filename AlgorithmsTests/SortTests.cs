@@ -14,12 +14,17 @@ namespace SortTests
     {
         Random rnd = new Random();
         const int ITEMS_COUNT = 1000;
-        //[TestInitialize]
-        //public void Init()
-        //{
-        //    Item.Clear();
-        //    FillRandom(ref Item);
-        //}
+
+        List<int> Item = new List<int>();
+        List<uint> UItem = new List<uint>();
+        [TestInitialize]
+        public void Init()
+        {
+            Item.Clear();
+            FillRandom(ref Item);
+            UItem.Clear();
+            FillRandom(ref UItem);
+        }
         public void FillRandom(ref List<int> item)
         {
             for (int i = 0; i < ITEMS_COUNT; i++)
@@ -33,11 +38,10 @@ namespace SortTests
             {
                 item.Add((uint)rnd.Next(0, ITEMS_COUNT));
             }
-        }
+        }       
         public void SortTest(AlgorithmsBase<int> toSort)
         {
-            var Item = new List<int>();
-            FillRandom(ref Item);
+            //FillRandom(ref Item);
             toSort.AddRange(Item);
             Item.Sort();
             toSort.TimeToSort();
@@ -48,14 +52,13 @@ namespace SortTests
         }
         public void SortTest(AlgorithmsBase<uint> toSort)
         {
-            var Item = new List<uint>();
-            FillRandom(ref Item);
-            toSort.AddRange(Item);
-            Item.Sort();
+            //FillRandom(ref UItem);
+            toSort.AddRange(UItem);
+            UItem.Sort();
             toSort.TimeToSort();
-            for (int i = 0; i < Item.Count; i++)
+            for (int i = 0; i < UItem.Count; i++)
             {
-                Assert.AreEqual(toSort.Items[i], Item[i]);
+                Assert.AreEqual(toSort.Items[i], UItem[i]);
             }
         }
         [TestMethod()]
@@ -101,7 +104,7 @@ namespace SortTests
         [TestMethod()]
         public void RadixSortTest()
         {
-            SortTest(new RadixSort());
+            SortTest(new LSDRadixSort());
         }
     }
 }

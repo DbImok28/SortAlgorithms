@@ -4,28 +4,15 @@ using System.Linq;
 
 namespace Algorithms
 {
-    public class RadixSort : AlgorithmsBase<uint>
-        //where T : IComparable
+    public class LSDRadixSort : AlgorithmsBase<uint>
     {
-        public RadixSort(IEnumerable<uint> items) : base(items) { }
-        public RadixSort() { }
+        public LSDRadixSort(IEnumerable<uint> items) : base(items) { }
+        public LSDRadixSort() { }
         public override string ToString()
         {
-            return "RadixSort";
+            return "LSDRadixSort";
         }
-        private uint GetMaxNumberLength()
-        {
-            uint length = 0;
-            foreach (var item in Items)
-            {
-                uint max = (uint)Math.Ceiling(Math.Log10(item + 0.5));
-                if (length < max)
-                {
-                    length = max;
-                }
-            }
-            return length;
-        }
+        
         /// <summary>
         /// uint only!
         /// </summary>
@@ -47,8 +34,8 @@ namespace Algorithms
 
             //sort
             for (int step = 0; step < length; step++)
-            {              
-                for (int i = 0; i < Items.Count; i++)               
+            {
+                for (int i = 0; i < Items.Count; i++)
                     groups[(int)(Items[i] % Math.Pow(10, step + 1) / Math.Pow(10, step))].Add(Items[i]);
                 
                 Items.Clear();
