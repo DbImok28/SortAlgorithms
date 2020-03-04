@@ -102,9 +102,14 @@ namespace SortTests
             SortTest(new GnomeSort<int>());
         }
         [TestMethod()]
-        public void RadixSortTest()
+        public void LSDRadixSortTest()
         {
             SortTest(new LSDRadixSort());
+        }
+        [TestMethod()]
+        public void MSDRadixSortTest()
+        {
+            SortTest(new MSDRadixSort());
         }
     }
 }
