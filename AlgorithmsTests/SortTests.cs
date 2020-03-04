@@ -7,29 +7,48 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Algorithms.Tests
+namespace SortTests
 {
     [TestClass()]
     public class SortTests
     {
         Random rnd = new Random();
-        List<int> Item = new List<int>();
-
-        [TestInitialize]
-        public void Init()
-        {
-            Item.Clear();
-            FillRandom(ref Item);
-        }
+        const int ITEMS_COUNT = 1000;
+        //[TestInitialize]
+        //public void Init()
+        //{
+        //    Item.Clear();
+        //    FillRandom(ref Item);
+        //}
         public void FillRandom(ref List<int> item)
         {
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < ITEMS_COUNT; i++)
             {
-                item.Add(rnd.Next(0, 1000));
+                item.Add(rnd.Next(0, ITEMS_COUNT));
+            }
+        }
+        public void FillRandom(ref List<uint> item)
+        {
+            for (int i = 0; i < ITEMS_COUNT; i++)
+            {
+                item.Add((uint)rnd.Next(0, ITEMS_COUNT));
             }
         }
         public void SortTest(AlgorithmsBase<int> toSort)
         {
+            var Item = new List<int>();
+            FillRandom(ref Item);
+            toSort.AddRange(Item);
+            Item.Sort();
+            toSort.TimeToSort();
+            for (int i = 0; i < Item.Count; i++)
+            {
+                Assert.AreEqual(toSort.Items[i], Item[i]);
+            }
+        }
+        public void SortTest(AlgorithmsBase<uint> toSort)
+        {
+            var Item = new List<uint>();
             FillRandom(ref Item);
             toSort.AddRange(Item);
             Item.Sort();
@@ -78,6 +97,11 @@ namespace Algorithms.Tests
         public void GnomeSortTest()
         {
             SortTest(new GnomeSort<int>());
+        }
+        [TestMethod()]
+        public void RadixSortTest()
+        {
+            SortTest(new RadixSort());
         }
     }
 }

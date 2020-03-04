@@ -9,7 +9,7 @@ namespace Algorithms.Model
         where T : IComparable
     {
         public BinarySearchTreeNode<T> Root { get; private set; } = null;
-        public int Count { get; private set; }
+        public int Count { get; private set; } = 0;
 
         public BinarySearchTree() { }
         public BinarySearchTree(IEnumerable<T> items) : base(items)
