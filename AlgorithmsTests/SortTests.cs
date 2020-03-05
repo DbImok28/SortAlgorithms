@@ -1,11 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Algorithms;
-using Algorithms.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SortTests
 {
@@ -16,14 +12,11 @@ namespace SortTests
         const int ITEMS_COUNT = 1000;
 
         List<int> Item = new List<int>();
-        List<uint> UItem = new List<uint>();
         [TestInitialize]
         public void Init()
         {
             Item.Clear();
             FillRandom(ref Item);
-            UItem.Clear();
-            FillRandom(ref UItem);
         }       
         public void FillRandom(ref List<int> item)
         {
@@ -32,13 +25,6 @@ namespace SortTests
                 item.Add(rnd.Next(0, ITEMS_COUNT));
             }
         }
-        public void FillRandom(ref List<uint> item)
-        {
-            for (int i = 0; i < ITEMS_COUNT; i++)
-            {
-                item.Add((uint)rnd.Next(0, ITEMS_COUNT));
-            }
-        }       
         public void SortTest(AlgorithmsBase<int> toSort)
         {
             //FillRandom(ref Item);
@@ -48,17 +34,6 @@ namespace SortTests
             for (int i = 0; i < Item.Count; i++)
             {
                 Assert.AreEqual(toSort.Items[i], Item[i]);
-            }
-        }
-        public void SortTest(AlgorithmsBase<uint> toSort)
-        {
-            //FillRandom(ref UItem);
-            toSort.AddRange(UItem);
-            UItem.Sort();
-            toSort.TimeToSort();
-            for (int i = 0; i < UItem.Count; i++)
-            {
-                Assert.AreEqual(toSort.Items[i], UItem[i]);
             }
         }
         [TestMethod()]
@@ -84,7 +59,7 @@ namespace SortTests
         [TestMethod()]
         public void TreeSortTest()
         {
-            SortTest(new Algorithms.Model.BinarySearchTree<int>());
+            SortTest(new TreeSort<int>());
         }
         [TestMethod()]
         public void HeapSortTest()
@@ -104,12 +79,12 @@ namespace SortTests
         [TestMethod()]
         public void LSDRadixSortTest()
         {
-            SortTest(new LSDRadixSort());
+            SortTest(new LSDRadixSort<int>());
         }
         [TestMethod()]
         public void MSDRadixSortTest()
         {
-            SortTest(new MSDRadixSort());
+            SortTest(new MSDRadixSort<int>());
         }
         [TestMethod()]
         public void MergeSortTest()

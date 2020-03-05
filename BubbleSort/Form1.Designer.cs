@@ -37,6 +37,7 @@
             this.TypeSortListBox = new System.Windows.Forms.ListBox();
             this.rndMinLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.patternLabel = new System.Windows.Forms.Label();
             this.addLable = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.buttonAddRandom = new System.Windows.Forms.Button();
@@ -57,7 +58,6 @@
             this.comparisonsLabel = new System.Windows.Forms.Label();
             this.swopLabel = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.patternLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -154,6 +154,15 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(290, 69);
             this.panel1.TabIndex = 9;
+            // 
+            // patternLabel
+            // 
+            this.patternLabel.AutoSize = true;
+            this.patternLabel.Location = new System.Drawing.Point(4, 46);
+            this.patternLabel.Name = "patternLabel";
+            this.patternLabel.Size = new System.Drawing.Size(74, 13);
+            this.patternLabel.TabIndex = 7;
+            this.patternLabel.Text = "Pattern(# # #)";
             // 
             // addLable
             // 
@@ -354,15 +363,6 @@
             this.panel5.Size = new System.Drawing.Size(113, 58);
             this.panel5.TabIndex = 20;
             // 
-            // patternLabel
-            // 
-            this.patternLabel.AutoSize = true;
-            this.patternLabel.Location = new System.Drawing.Point(4, 46);
-            this.patternLabel.Name = "patternLabel";
-            this.patternLabel.Size = new System.Drawing.Size(74, 13);
-            this.patternLabel.TabIndex = 7;
-            this.patternLabel.Text = "Pattern(# # #)";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -379,7 +379,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.TypeSortListBox);
             this.Name = "Form1";
-            this.Text = "Sort";
+            this.Text = "BubbleSort";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

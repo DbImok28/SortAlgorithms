@@ -10,9 +10,10 @@ namespace Algorithms
         public List<T> Items { get; protected set; } = new List<T>();
         public int SwopCount { get; protected set; } = 0;
         public int ComparisonCount { get; protected set; } = 0;
+        public Stopwatch Timer { get; protected set; }
         public event EventHandler<Tuple<T, T>> CompareEvent;
         public event EventHandler<Tuple<T, T>> SwopEvent;
-        public Stopwatch Timer { get; private set; }
+        public event EventHandler<Tuple<int, T>> SetEvent;
 
         public AlgorithmsBase() { }   
         public AlgorithmsBase(IEnumerable<T> items)
@@ -67,6 +68,25 @@ namespace Algorithms
             ComparisonCount++;
             CompareEvent?.Invoke(this, new Tuple<T, T>(a, b));
             return a.CompareTo(b);
+        }
+        protected void Set(int position, T item)
+        {
+            Items[position] = item;
+            SetEvent?.Invoke(this, new Tuple<int, T>(position, item));
+        }
+
+        public void Call_CompareEvent(object sender, Tuple<T, T> e)
+        {
+            CompareEvent?.Invoke(sender, e);
+        }
+        public void Call_SwopEvent(object sender,Tuple<T, T> e)
+        {
+            SwopEvent?.Invoke(sender, e);
+        }
+        public void Call_SetEvent(object sender, Tuple<int, T> e)
+        {
+            if(e.Item1 < Items.Count)
+                SetEvent?.Invoke(sender, e);
         }
         public override string ToString()
         {

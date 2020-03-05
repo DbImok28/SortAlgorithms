@@ -16,6 +16,7 @@ namespace Sort
     public partial class Form1 : Form
     {
         Random rnd = new Random();
+        AlgorithmsBase<SortedItem> sorted;
 
         AlgorithmsBase<int> toSort = new AlgorithmsBase<int>();
 
@@ -27,8 +28,10 @@ namespace Sort
             new CocktailSort<SortedItem>(),
             new InsertionSort<SortedItem>(),
             new ShellSort<SortedItem>(),
-            new Algorithms.Model.BinarySearchTree<SortedItem>(),
+            new TreeSort<SortedItem>(),
             new HeapSort<SortedItem>(),
+            new LSDRadixSort<SortedItem>(),
+            new MSDRadixSort<SortedItem>(),
             new MergeSort<SortedItem>()
         };
         public Form1()
@@ -52,7 +55,8 @@ namespace Sort
             {
                 if (int.TryParse(item.ToString(), out int value))
                 {
-                    toSort.Add(value);
+                    if (!(value < 0))
+                        toSort.Add(value);
                 }
             }
             textBoxAdd.Clear();
@@ -70,7 +74,8 @@ namespace Sort
                 for (int i = 0; i < count; i++)
                 {
                     int value = rnd.Next(min, max);
-                    toSort.Items.Add(value);
+                    if (!(value < 0))
+                        toSort.Items.Add(value);
                 }
                 DisplayPanelItemSorted(toSort.Items);
                 DisplayItems(labelToSort, toSort.Items);
@@ -84,7 +89,7 @@ namespace Sort
         }
         private void buttonSort_Click(object sender, EventArgs e)
         {
-            AlgorithmsBase<SortedItem> sorted = (AlgorithmsBase<SortedItem>)TypeSortListBox.SelectedItem;
+            sorted = (AlgorithmsBase<SortedItem>)TypeSortListBox.SelectedItem;
             if (sorted == null)
             {
                 labelSorted.Text = "Type sort is not selected";
@@ -98,6 +103,7 @@ namespace Sort
             {
                 sorted.CompareEvent += CompareEvent;
                 sorted.SwopEvent += SwopEvent;
+                sorted.SetEvent += SetEvent;
             }
             sorted.AddRange(ConvertToSortedItem(toSort.Items));
             DisplayPanelItemSorted(sorted.Items);
@@ -114,8 +120,21 @@ namespace Sort
             DisplaySortStatistic(sorted, time);
             sorted.CompareEvent -= CompareEvent;
             sorted.SwopEvent -= SwopEvent;
+            sorted.SetEvent -= SetEvent;
         }
 
+        private void SetEvent(object sender, Tuple<int, SortedItem> e)
+        {
+            e.Item2.SetColor(Color.Red);
+
+            //sorted.Items[e.Item1].SetValue(e.Item2.Value);
+            e.Item2.SetPosition(e.Item1);
+            panelItemSorted.Refresh();
+            if (int.TryParse(textBoxSpeed.Text, out int speed))
+                Thread.Sleep(speed);
+
+            e.Item2.SetColor(Color.Blue);
+        }
         private void SwopEvent(object sender, Tuple<SortedItem, SortedItem> e)
         {
             int temp = e.Item1.Number;
@@ -130,10 +149,9 @@ namespace Sort
             e.Item2.SetColor(Color.Green);
             panelItemSorted.Refresh();
 
-            if (int.TryParse(textBoxSpeed.Text, out int speed))
-            {
+            if (int.TryParse(textBoxSpeed.Text, out int speed))            
                 Thread.Sleep(speed);
-            }
+            
 
             e.Item1.SetColor(Color.Blue);
             e.Item2.SetColor(Color.Blue);

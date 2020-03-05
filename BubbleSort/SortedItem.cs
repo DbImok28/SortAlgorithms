@@ -45,6 +45,10 @@ namespace Sort
             ItemLabel.Name = "ItemLabel_" + number;
             ItemLabel.TabIndex = number;
         }
+        public void SetValue(int value)
+        {
+            Value = value;
+        }
         public void SetColor(Color color)
         {
             ItemVerticalProgressBar.Color = color;
@@ -60,6 +64,10 @@ namespace Sort
         public override string ToString()
         {
             return Value.ToString();
+        }
+        public override int GetHashCode()
+        {
+            return Value;
         }
     }
 }

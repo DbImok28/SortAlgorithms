@@ -15,7 +15,11 @@ namespace Algorithms
         }
         protected override void Sort()
         {
-            Items = SubSort(Items);
+            var sorted = SubSort(Items);
+            for (int i = 0; i < sorted.Count; i++)                       
+            {
+                Set(i, sorted[i]);
+            }
         }
         public List<T> SubSort(List<T> items)
         {
@@ -26,7 +30,6 @@ namespace Algorithms
             return Merge(SubSort(items.Take(subCount).ToList()),
                          SubSort(items.Skip(subCount).ToList()));
         }
-
         private List<T> Merge(List<T> left, List<T> right)
         {
             var result = new List<T>();
