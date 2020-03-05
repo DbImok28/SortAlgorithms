@@ -18,7 +18,7 @@ namespace Algorithms
         protected override void Sort()
         {
             //create groups
-            var groups = new List<List<uint>>();
+            var groups = new List<List<uint>>(10);
             for (int i = 0; i < 10; i++)            
                 groups.Add(new List<uint>());
             

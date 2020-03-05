@@ -28,7 +28,8 @@ namespace Sort
             new InsertionSort<SortedItem>(),
             new ShellSort<SortedItem>(),
             new Algorithms.Model.BinarySearchTree<SortedItem>(),
-            new HeapSort<SortedItem>()
+            new HeapSort<SortedItem>(),
+            new MergeSort<SortedItem>()
         };
         public Form1()
         {

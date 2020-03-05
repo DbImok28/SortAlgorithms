@@ -31,7 +31,7 @@ namespace Algorithms
             var result = new List<uint>();
             //create groups
 
-            var groups = new List<List<uint>>();
+            var groups = new List<List<uint>>(10);
             for (uint i = 0; i < 10; i++)
                 groups.Add(new List<uint>());
 

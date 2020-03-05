@@ -24,7 +24,7 @@ namespace SortTests
             FillRandom(ref Item);
             UItem.Clear();
             FillRandom(ref UItem);
-        }
+        }       
         public void FillRandom(ref List<int> item)
         {
             for (int i = 0; i < ITEMS_COUNT; i++)
@@ -110,6 +110,11 @@ namespace SortTests
         public void MSDRadixSortTest()
         {
             SortTest(new MSDRadixSort());
+        }
+        [TestMethod()]
+        public void MergeSortTest()
+        {
+            SortTest(new MergeSort<int>());
         }
     }
 }
