@@ -91,5 +91,10 @@ namespace SortTests
         {
             SortTest(new MergeSort<int>());
         }
+        [TestMethod()]
+        public void QuickSortTest()
+        {
+            SortTest(new QuickSort<int>());
+        }
     }
 }

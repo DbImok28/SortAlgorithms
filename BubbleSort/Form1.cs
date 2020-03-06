@@ -32,7 +32,8 @@ namespace Sort
             new HeapSort<SortedItem>(),
             new LSDRadixSort<SortedItem>(),
             new MSDRadixSort<SortedItem>(),
-            new MergeSort<SortedItem>()
+            new MergeSort<SortedItem>(),
+            new QuickSort<SortedItem>()
         };
         public Form1()
         {
