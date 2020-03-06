@@ -126,7 +126,7 @@ namespace Sort
 
         private void SetEvent(object sender, Tuple<int, SortedItem> e)
         {
-            e.Item2.SetColor(Color.Red);
+            e.Item2.SetColor(Color.Gold);
 
             //sorted.Items[e.Item1].SetValue(e.Item2.Value);
             e.Item2.SetPosition(e.Item1);
@@ -153,7 +153,7 @@ namespace Sort
         private void CompareEvent(object sender, Tuple<SortedItem, SortedItem> e)
         {
             e.Item1.SetColor(Color.Red);
-            e.Item2.SetColor(Color.Green);
+            e.Item2.SetColor(Color.Red);
             panelItemSorted.Refresh();
 
             if (int.TryParse(textBoxSpeed.Text, out int speed))            
