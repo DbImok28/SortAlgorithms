@@ -58,6 +58,7 @@
             this.comparisonsLabel = new System.Windows.Forms.Label();
             this.swopLabel = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.setLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -355,13 +356,23 @@
             // panel5
             // 
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel5.Controls.Add(this.setLabel);
             this.panel5.Controls.Add(this.comparisonsLabel);
             this.panel5.Controls.Add(this.swopLabel);
             this.panel5.Controls.Add(this.timeLabel);
-            this.panel5.Location = new System.Drawing.Point(406, 177);
+            this.panel5.Location = new System.Drawing.Point(406, 158);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(113, 58);
+            this.panel5.Size = new System.Drawing.Size(113, 77);
             this.panel5.TabIndex = 20;
+            // 
+            // setLabel
+            // 
+            this.setLabel.AutoSize = true;
+            this.setLabel.Location = new System.Drawing.Point(3, 54);
+            this.setLabel.Name = "setLabel";
+            this.setLabel.Size = new System.Drawing.Size(28, 13);
+            this.setLabel.TabIndex = 3;
+            this.setLabel.Text = "Sets";
             // 
             // Form1
             // 
@@ -431,6 +442,7 @@
         private System.Windows.Forms.Label swopLabel;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label patternLabel;
+        private System.Windows.Forms.Label setLabel;
     }
 }
 

@@ -10,6 +10,7 @@ namespace Algorithms
         public List<T> Items { get; protected set; } = new List<T>();
         public int SwopCount { get; protected set; } = 0;
         public int ComparisonCount { get; protected set; } = 0;
+        public int SetCount { get; protected set; } = 0;
         public Stopwatch Timer { get; protected set; }
         public event EventHandler<Tuple<T, T>> CompareEvent;
         public event EventHandler<Tuple<T, T>> SwopEvent;
@@ -71,6 +72,7 @@ namespace Algorithms
         }
         protected void Set(int position, T item)
         {
+            SetCount++;
             Items[position] = item;
             SetEvent?.Invoke(this, new Tuple<int, T>(position, item));
         }

@@ -23,10 +23,10 @@ namespace Sort
         List<AlgorithmsBase<SortedItem>> TypeSort = new List<AlgorithmsBase<SortedItem>>()
         {
             new BubbleSort<SortedItem>(),
-            new GnomeSort<SortedItem>(),
-            new SelectionSort<SortedItem>(),
             new CocktailSort<SortedItem>(),
+            new GnomeSort<SortedItem>(),
             new InsertionSort<SortedItem>(),
+            new SelectionSort<SortedItem>(),
             new ShellSort<SortedItem>(),
             new TreeSort<SortedItem>(),
             new HeapSort<SortedItem>(),
@@ -138,11 +138,17 @@ namespace Sort
         }
         private void SwopEvent(object sender, Tuple<SortedItem, SortedItem> e)
         {
+            e.Item1.SetColor(Color.Aqua);
+            e.Item2.SetColor(Color.Aqua);
+
             int temp = e.Item1.Number;
             e.Item1.SetPosition(e.Item2.Number);
             e.Item2.SetPosition(temp);
 
             panelItemSorted.Refresh();
+
+            e.Item1.SetColor(Color.Blue);
+            e.Item2.SetColor(Color.Blue);
         }
         private void CompareEvent(object sender, Tuple<SortedItem, SortedItem> e)
         {
@@ -236,9 +242,11 @@ namespace Sort
 
         public void DisplaySortStatistic(AlgorithmsBase<SortedItem> sort, TimeSpan time)
         {
+
             timeLabel.Text = "Time: " + time.TotalSeconds.ToString() + " s";
             comparisonsLabel.Text = "Comparisons: " + sort.ComparisonCount;
             swopLabel.Text = "Swops: " + sort.SwopCount;
+            setLabel.Text = "Sets: " + sort.SetCount;
         }
         
         public List<SortedItem> ConvertToSortedItem(List<int> items)
